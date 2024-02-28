@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Snake
+Comment=Snake game
+Exec=/usr/bin/snake
+Icon=/usr/share/ressources/icon.ico
+Terminal=false
+Type=Application
