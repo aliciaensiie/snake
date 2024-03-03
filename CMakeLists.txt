@@ -4,7 +4,7 @@ project(game4)
 #SFML2.5 for linux and SFML2.6 for window
 if(UNIX)
 	link_directories(snake PUBLIC "../SFML-2.5.1/lib")
-	include_directories(snake PRIVATE "/SFML-2.5.1/include")
+	include_directories(snake PRIVATE "../SFML-2.5.1/include")
 elseif (WIN32)
 	link_directories(snake PUBLIC "../SFML-2.6.0/lib")
 	include_directories(snake PRIVATE "../SFML-2.6.0/include")
@@ -74,7 +74,7 @@ install(TARGETS snake RUNTIME DESTINATION bin)
 
 #install ressources + permissons
 if (UNIX)
-	install(DIRECTORY "/home/arry/Documents/projetc++/project4/ressources" DESTINATION share USE_SOURCE_PERMISSIONS)
+	install(DIRECTORY "/home/arry/Documents/projetc++/snake/ressources" DESTINATION share FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE GROUP_EXECUTE WORLD_READ WORLD_WRITE WORLD_EXECUTE)
 elseif (WIN32)
 	install(DIRECTORY "C:/Users/alici/OneDrive/Documents/project4/ressources" DESTINATION . )
 	set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "AccessControl::GrantOnFile \\\".\\\\ressources\\\" \\\"(BU)\\\" \\\"FullAccess\\\"")
@@ -82,8 +82,8 @@ endif()
 
 #desktop linux
 if (UNIX)
-	configure_file("/home/arry/Documents/projetc++/project4/snake.desktop.in" "/home/arry/Documents/projetc++/project4/snake.desktop")
-	install(FILES "/home/arry/Documents/projetc++/project4/snake.desktop" DESTINATION share/applications)
+	configure_file("/home/arry/Documents/projetc++/snake/snake.desktop.in" "/home/arry/Documents/projetc++/snake/snake.desktop")
+	install(FILES "/home/arry/Documents/projetc++/snake/snake.desktop" DESTINATION share/applications)
 endif()
 
 include(CPack)
