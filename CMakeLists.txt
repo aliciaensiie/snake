@@ -63,6 +63,12 @@ elseif (WIN32)
 	install(FILES ${SFML_DLL} DESTINATION bin)
 endif()
 
+#dll window
+if(WIN32)
+	file (GLOB WINDOWS_DLL "C:/Users/alici/OneDrive/Documents/project4/DLLwindow/*.dll")
+	install(FILES ${WINDOWS_DLL} DESTINATION bin)
+endif()
+
 
 install(TARGETS snake RUNTIME DESTINATION bin)
 
