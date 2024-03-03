@@ -51,7 +51,7 @@ int main()
    
     sf::Text size_snake("size: "+ std::to_string(snake.getNumberOfPoints()/2)+ " / size max: " + line, font2, 20);
     size_snake.setFillColor(sf::Color::Black);
-    size_snake.setPosition(window.getSize().x/2, 0);
+    size_snake.setPosition(window.getSize().x/2.5, 0);
 
     //
     bool press = false;
