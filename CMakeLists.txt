@@ -1,13 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
 project(game4)
 
+#set PATH
+if(UNIX)
+	set(SFML_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../SFML-2.5.1)
+elseif(WIN32)
+	set(SFML_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../SFML-2.6.0)
+	set(SFML_WINDOWS C:/Users/alici/OneDrive/Documents/project4/DLLwindow)
+endif()
+
 #SFML2.5 for linux and SFML2.6 for window
 if(UNIX)
-	link_directories(snake PUBLIC "../SFML-2.5.1/lib")
-	include_directories(snake PRIVATE "../SFML-2.5.1/include")
+	link_directories(snake PUBLIC "${SFML_PATH}/lib")
+	include_directories(snake PRIVATE "${SFML_PATH}/include")
 elseif (WIN32)
-	link_directories(snake PUBLIC "../SFML-2.6.0/lib")
-	include_directories(snake PRIVATE "../SFML-2.6.0/include")
+	link_directories(snake PUBLIC "${SFML_PATH}/lib")
+	include_directories(snake PRIVATE "${SFML_PATH}/include")
 endif()
 
 #executable
@@ -59,13 +67,13 @@ set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}/ressources/icon.ico")
 if(UNIX)
 	set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-graphics2.5")
 elseif (WIN32)
-	file(GLOB SFML_DLL "C:/Users/alici/OneDrive/Documents/SFML-2.6.0/bin/*.dll")
+	file(GLOB SFML_DLL "${SFML_PATH}/bin/*.dll")
 	install(FILES ${SFML_DLL} DESTINATION bin)
 endif()
 
 #dll window
 if(WIN32)
-	file (GLOB WINDOWS_DLL "C:/Users/alici/OneDrive/Documents/project4/DLLwindow/*.dll")
+	file (GLOB WINDOWS_DLL "{SFML_WINDOWS}/*.dll")
 	install(FILES ${WINDOWS_DLL} DESTINATION bin)
 endif()
 
@@ -74,16 +82,16 @@ install(TARGETS snake RUNTIME DESTINATION bin)
 
 #install ressources + permissons
 if (UNIX)
-	install(DIRECTORY "/home/arry/Documents/projetc++/snake/ressources" DESTINATION share FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE GROUP_EXECUTE WORLD_READ WORLD_WRITE WORLD_EXECUTE)
+	install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ressources" DESTINATION share FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE GROUP_EXECUTE WORLD_READ WORLD_WRITE WORLD_EXECUTE)
 elseif (WIN32)
-	install(DIRECTORY "C:/Users/alici/OneDrive/Documents/project4/ressources" DESTINATION . )
+	install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ressources" DESTINATION . )
 	set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "AccessControl::GrantOnFile \\\".\\\\ressources\\\" \\\"(BU)\\\" \\\"FullAccess\\\"")
 endif()
 
 #desktop linux
 if (UNIX)
-	configure_file("/home/arry/Documents/projetc++/snake/snake.desktop.in" "/home/arry/Documents/projetc++/snake/snake.desktop")
-	install(FILES "/home/arry/Documents/projetc++/snake/snake.desktop" DESTINATION share/applications)
+	configure_file("${CMAKE_CURRENT_SOURCE_DIR}/snake.desktop.in" "${CMAKE_CURRENT_SOURCE_DIR}/snake.desktop")
+	install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/snake.desktop" DESTINATION share/applications)
 endif()
 
 include(CPack)
