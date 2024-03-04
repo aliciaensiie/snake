@@ -6,7 +6,7 @@ if(UNIX)
 	set(SFML_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../SFML-2.5.1)
 elseif(WIN32)
 	set(SFML_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../SFML-2.6.0)
-	set(SFML_WINDOWS C:/Users/alici/OneDrive/Documents/project4/DLLwindow)
+	set(WINDOWS_PATH C:/Users/alici/OneDrive/Documents/project4/DLLwindow)
 endif()
 
 #SFML2.5 for linux and SFML2.6 for window
@@ -73,7 +73,7 @@ endif()
 
 #dll window
 if(WIN32)
-	file (GLOB WINDOWS_DLL "{SFML_WINDOWS}/*.dll")
+	file (GLOB WINDOWS_DLL "{WINDOWS_PATH}/*.dll")
 	install(FILES ${WINDOWS_DLL} DESTINATION bin)
 endif()
 
