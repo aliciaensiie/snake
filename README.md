@@ -7,10 +7,8 @@ First, you need to install SFML version 2.5 (or higher on Windows) as well as CM
 
 To compile and obtain the executable, create a build directory in the game, navigate to the directory, and use the following commands:
 <pre>
-```bash
     cmake ..
     cmake --build .
-```bash
 </pre>
 You can find the executable in the build directory.
 
